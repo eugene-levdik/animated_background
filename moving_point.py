@@ -4,10 +4,14 @@ import math as m
 
 class MovingPoint:
 
-    def __init__(self, screensize, speed, duration, point_seed):
+    def __init__(self, screensize, speed, duration, point_seed, init_pos=None):
         w, h = screensize
         r.seed(point_seed)
-        x, y = r.random() * w, r.random() * h
+        if init_pos is None:
+            x = r.random() * w
+            y = r.random() * h
+        else:
+            x, y = init_pos
         angle = r.random() * 2 * m.pi
         self.path = []
         self.path.append(tuple(map(int, (x, y))))
@@ -18,7 +22,7 @@ class MovingPoint:
             x += vx
             y += vy
             self.path.append(tuple(map(int, (x, y))))
-            angle += (r.random()) * m.pi * speed / 30
+            angle += ((r.random()) + 1) * m.pi * speed / 100
 
     def __getitem__(self, item):
         return self.path[item]

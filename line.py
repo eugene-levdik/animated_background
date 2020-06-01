@@ -11,3 +11,8 @@ class Line:
 
     def is_right(self, x, y):
         return (self.a * x + self.b * y + self.c) > 0
+
+    def cross_ordinate(self, y):
+        if self.a == 0:
+            return None
+        return int((-self.b * y - self.c) / self.a)
